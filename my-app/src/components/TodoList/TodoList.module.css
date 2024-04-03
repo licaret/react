@@ -5,5 +5,10 @@
 }
 
 .completedItem {
+  color: tomato;
 	text-decoration: line-through;
+}
+
+select {
+  margin-top: 20px;
 }

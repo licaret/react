@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import styles from "./TodoList.module.css";
 
+const FILTER_TYPE = {
+  ALL: "all",
+  ACTIVE: "active",
+  COMPLETED: "completed",
+};
+
 class TodoList extends Component {
   constructor(props) {
     super(props);
@@ -8,8 +14,11 @@ class TodoList extends Component {
       todos: [
         { id: 1, text: "Uda Plante", isCompleted: true },
         { id: 2, text: "Hraneste Cainele si Pisica", isCompleted: false },
+        { id: 3, text: "Scoate afara gunoiul", isCompleted: true },
+        { id: 4, text: "Aspira", isCompleted: false },
       ],
       newTodo: "",
+      filter: FILTER_TYPE.ALL,
     };
   }
 
@@ -42,7 +51,24 @@ class TodoList extends Component {
     }));
   };
 
+  handleFilterChange = (event) => {
+    this.setState({ filter: event.target.value });
+  };
+
+  filterTodos = () => {
+    const { todos, filter } = this.state;
+    switch (filter) {
+      case FILTER_TYPE.COMPLETED:
+        return todos.filter((todo) => todo.isCompleted);
+      case FILTER_TYPE.ACTIVE:
+        return todos.filter((todo) => !todo.isCompleted);
+      default:
+        return todos;
+    }
+  };
+
   render() {
+    const filteredTodos = this.filterTodos();
     return (
       <div>
         <h1>Todo List</h1>
@@ -55,21 +81,32 @@ class TodoList extends Component {
           />
           <button onClick={this.handleAddTodo}>Add Todo Item</button>
         </div>
-        {this.state.todos.map((todo) =>
-            todo.isCompleted ? (
-              <h3
-                key={todo.id}
-                onClick={() => this.handleToggleTodo(todo.id)}
-                className={styles.completedItem}
-              >
-                {todo.text}
-              </h3>
-            ) : (
-              <h3 key={todo.id} onClick={() => this.handleToggleTodo(todo.id)}>
-                {todo.text}
-              </h3>
-            )
-          )}
+
+        <select
+          name="filter"
+          value={this.state.filter}
+          onChange={this.handleFilterChange}
+        >
+          <option value={FILTER_TYPE.ALL}>All</option>
+          <option value={FILTER_TYPE.ACTIVE}>Active</option>
+          <option value={FILTER_TYPE.COMPLETED}>Completed</option>
+        </select>
+
+        {filteredTodos.map((todo) =>
+          todo.isCompleted ? (
+            <h3
+              key={todo.id}
+              onClick={() => this.handleToggleTodo(todo.id)}
+              className={styles.completedItem}
+            >
+              {todo.text}
+            </h3>
+          ) : (
+            <h3 key={todo.id} onClick={() => this.handleToggleTodo(todo.id)}>
+              {todo.text}
+            </h3>
+          )
+        )}
       </div>
     );
   }
