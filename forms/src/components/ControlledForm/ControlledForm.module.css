@@ -1,0 +1,13 @@
+.form {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.field {
+  border: 1px solid blue;
+}
+
+.errorField {
+  border: 1px solid red;
+}
