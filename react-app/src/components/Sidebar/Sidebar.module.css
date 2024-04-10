@@ -1,0 +1,51 @@
+.sidebar {
+  width: 320px;
+  height: 100vh;
+  background-color: #fff;
+}
+
+.sidebarBrandBox {
+  background-color: #161d2a;
+  height: 80px;
+}
+
+.wrapperContainer {
+	height: calc(100% - 80px - 48px);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 24px;
+}
+
+.listWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.userName {
+	display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+	margin-bottom: 24px;
+}
+
+.text {
+	display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  color: #010101;
+  font-family: Montserrat sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 1.25px;
+  text-align: left;
+	text-transform: uppercase;
+}
+
+.sidebar svg {
+	fill: #FF6B0A;
+}
