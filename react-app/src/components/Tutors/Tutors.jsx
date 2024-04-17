@@ -2,17 +2,21 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Paper from "../Paper/Paper";
 import styles from "./Tutors.module.css";
-import { nanoid } from "nanoid";
+import FormTutors from "../FormTutors/FormTutors";
+import ThemedButton from "../ThemedButton/ThemedButton";
 
 const Tutors = ({ tutors }) => {
   const [showForm, setShowForm] = useState(false);
   const [tutorsData, setTutorsData] = useState(tutors);
 
+  const handleRemoveTutor = (id) => {
+    setTutorsData(tutorsData.filter((tutor) => tutor.id !== id));
+  };
+
   const renderTutorsPapers = () =>
     tutorsData.map((tutor) => {
-      const id = nanoid();
       return (
-        <Paper key={id}>
+        <Paper key={tutor.id}>
           <div className={styles.tutorsContainer}>
             <div className={styles.tutorName}>
               <p>{tutor.firstName}</p>
@@ -26,41 +30,31 @@ const Tutors = ({ tutors }) => {
             </div>
 
             <p>{tutor.options}</p>
+
+            <ThemedButton onClick={() => handleRemoveTutor(tutor.id)}>
+              Remove Tutor
+            </ThemedButton>
           </div>
         </Paper>
       );
     });
 
-  const handleFormSubmit = (abstractData) => {
-    setTutorsData([...tutorsData, abstractData]);
+  const handleFormSubmit = (newTutorData) => {
+    setTutorsData([...tutorsData, newTutorData]);
+    setShowForm(false);
   };
 
-  const renderAddNewTutorForm = () => (
-    <form>
-      <input type="text" name="surname" id="surname" placeholder="Surname" />
-      <input type="text" name="name" id="name" placeholder="Name" />
-      <input
-        type="text"
-        name="phoneNumber"
-        id="phoneNumber"
-        placeholder="Phone Number"
-      />
-      <input type="email" name="email" id="email" placeholder="Email" />
-      <input type="text" name="city" id="city" placeholder="City" />
-
-      <button onClick={handleFormSubmit}>Invite</button>
-    </form>
-  );
-
   return (
-    <div className={styles.wrapper}>
-      {renderTutorsPapers()}
+    <>
+      <div className={styles.wrapper}>{renderTutorsPapers()}</div>
       {showForm ? (
-        renderAddNewTutorForm()
+        <FormTutors updateParentState={handleFormSubmit} />
       ) : (
-        <button onClick={() => setShowForm(true)}>Add Tutor</button>
+        <ThemedButton onClick={() => setShowForm(true)}>
+          Add Tutor
+        </ThemedButton>
       )}
-    </div>
+    </>
   );
 };
 
