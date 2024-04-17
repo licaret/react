@@ -1,16 +1,16 @@
 import React from "react";
 import styles from "./Sidebar.module.css";
-import { menuConfig } from "../../helpers/menu";
 import { MdAccountCircle } from "react-icons/md";
+import PropTypes from 'prop-types';
 
-const Sidebar = () => {
+const Sidebar = ({ data }) => {
   return (
     <aside className={styles.sidebar}>
       <div className={styles.sidebarBrandBox}></div>
 
       <div className={styles.wrapperContainer}>
         <div className={styles.listWrapper}>
-          {menuConfig.map((menuItem) => (
+          {data.map((menuItem) => (
             <div key={menuItem.id} className={styles.text}>
               {menuItem.icon}
               {menuItem.name}
@@ -27,6 +27,10 @@ const Sidebar = () => {
       </div>
     </aside>
   );
+};
+
+Sidebar.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default Sidebar;

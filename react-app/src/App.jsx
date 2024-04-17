@@ -4,14 +4,18 @@ import University from "./components/University/University";
 import Tutors from "./components/Tutors/Tutors";
 import Cities from "./components/Cities/Cities";
 import Faculties from "./components/Faculties/Faculties";
+import { menuConfig } from "./helpers/menu";
+import data from "./helpers/data.json";
 
 function App() {
+  const { name, description, tutors } = data;
+
   return (
     <main>
-      <Sidebar test />
+      <Sidebar data={menuConfig} />
       <section className="container">
-        <University />
-        <Tutors />
+        <University name={name} description={description} />
+        <Tutors tutors={tutors} />
         <Cities />
         <Faculties />
       </section>
