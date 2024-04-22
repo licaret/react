@@ -10,15 +10,15 @@ import ThemeContext from "./components/ThemeContext/ThemeContext";
 import theme from "./helpers/themeColors";
 
 function App() {
-  const { name, description, tutors } = data;
+  const { name, description } = data;
 
   return (
     <main>
-      <ThemeContext.Provider value={theme.light}>
+      <ThemeContext.Provider value={theme.dark}>
         <Sidebar data={menuConfig} />
         <section className="container">
           <University name={name} description={description} />
-          <Tutors tutors={tutors} />
+          <Tutors />
           <Cities />
           <Faculties />
         </section>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Paper from "../Paper/Paper";
 import styles from "./University.module.css";
 import universityEmoji from "../../../public/University.png";
