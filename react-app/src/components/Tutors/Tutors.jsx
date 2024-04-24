@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Paper from "../Paper/Paper";
 import styles from "./Tutors.module.css";
 import FormTutors from "../FormTutors/FormTutors";
@@ -32,29 +32,6 @@ const Tutors = () => {
     isLoading,
     error,
   } = useFetch(JSON_PLACEHOLDER_USERS_URL, formatData);
-
-  // useEffect(() => {
-  //   fetch(`https://jsonplaceholder.typicode.com/users`)
-  //     .then((res) => res.json())
-  //     .then((data) => data.map(tutor => {
-  //       const fullNameArr = tutor.name.split(" ");
-  //       const firstName = fullNameArr[0];
-  //       const lastName = fullNameArr[1];
-  //       return {
-  //         id: tutor.id,
-  //         firstName,
-  //         lastName,
-  //         phone: tutor.phone,
-  //         email: tutor.email,
-  //         city: tutor.address.city,
-  //         options: "Group creation",
-  //       };
-  //     }))
-  //     .then(tutors => {
-  //       setTutorsData(tutors);
-  //     })
-  //     .catch((err) => console.error(err));
-  // }, []);
 
   const handleRemoveTutor = (id) => {
     setTutorsData(tutorsData.filter((tutor) => tutor.id !== id));
