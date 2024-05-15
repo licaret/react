@@ -1,33 +1,27 @@
 import React, { useReducer } from "react";
 import AddTask from "../AddTask/AddTask";
 import TaskList from "../TaskList/TaskList";
-import { nanoid } from "nanoid";
-import tasksReducer from "../../reducers/tasksReducer";
-import { ADD_TASK, REMOVE_TASK } from "../../actions/actionTypes";
-
-const initialTasks = [{ id: nanoid(), text: "Feed the Dog", done: true }];
+import { useDispatch, useSelector } from "react-redux";
+import { addTask, deleteTask } from "../../slices/tasksSlice";
 
 function TasksApp() {
-  const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
+  const tasks = useSelector((state) => state.tasks);
+  const dispatch = useDispatch();
 
   const handleAddTask = (taskName) => {
-    const action = {
-      type: ADD_TASK,
-      payload: {
+    dispatch(
+      addTask({
         text: taskName,
-      },
-    };
-    dispatch(action);
+      })
+    );
   };
 
   const handleDeleteTask = (taskId) => {
-    const action = {
-      type: REMOVE_TASK,
-      payload: {
+    dispatch(
+      deleteTask({
         id: taskId,
-      },
-    };
-    dispatch(action);
+      })
+    );
   };
 
   return (
