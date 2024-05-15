@@ -6,9 +6,12 @@ import ThemedButton from "../ThemedButton/ThemedButton";
 import withLogging from "../../decorators/withLogging";
 import useFetch from "../../hooks/useFetch";
 import { JSON_PLACEHOLDER_USERS_URL } from "../../helpers/constants";
+import { useSearchParams } from "react-router-dom";
 
 const Tutors = () => {
   const [showForm, setShowForm] = useState(false);
+  const [searchParams] = useSearchParams();
+  const userId = searchParams.get("userId") || 1;
 
   const formatData = (data) =>
     data.map((tutor) => {
@@ -31,7 +34,7 @@ const Tutors = () => {
     setData: setTutorsData,
     isLoading,
     error,
-  } = useFetch(JSON_PLACEHOLDER_USERS_URL, formatData);
+  } = useFetch(`${JSON_PLACEHOLDER_USERS_URL}/${userId}`, formatData);
 
   const handleRemoveTutor = (id) => {
     setTutorsData(tutorsData.filter((tutor) => tutor.id !== id));

@@ -15,7 +15,7 @@ function useFetch(url, callbackFct = null) {
         const result = await response.json();
 
         if (callbackFct) {
-          setData(callbackFct(result));
+          setData(callbackFct([result]));
         } else {
           setData(result);
         }

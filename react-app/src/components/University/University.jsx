@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Paper from "../Paper/Paper";
 import styles from "./University.module.css";
 import universityEmoji from "../../../public/University.png";
@@ -18,7 +18,7 @@ const University = ({ name, description }) => {
       </Paper>
 
       <Paper>
-        <p>{description}</p>
+        <p className={styles.universityDescription}>{description}</p>
       </Paper>
     </div>
   );
