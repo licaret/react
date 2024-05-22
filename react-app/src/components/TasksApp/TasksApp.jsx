@@ -1,10 +1,9 @@
 import AddTask from "../AddTask/AddTask";
 import TaskList from "../TaskList/TaskList";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addTask, deleteTask } from "../../slices/tasksSlice";
 
 function TasksApp() {
-  const tasks = useSelector((state) => state.tasks);
   const dispatch = useDispatch();
 
   const handleAddTask = (taskName) => {
@@ -27,7 +26,7 @@ function TasksApp() {
     <>
       <h2>List</h2>
       <AddTask onAddTask={handleAddTask} />
-      <TaskList tasks={tasks} onDeleteTask={handleDeleteTask} />
+      <TaskList onDeleteTask={handleDeleteTask} />
     </>
   );
 }

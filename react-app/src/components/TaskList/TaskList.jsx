@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchTasks } from "../../operations/operations.js";
 
 function Task({ task, onDelete }) {
   const handleDeleteButton = () => {
@@ -17,19 +19,27 @@ function Task({ task, onDelete }) {
   );
 }
 
-function TaskList({ tasks, onDeleteTask }) {
-  const [localTasks, setLocalTasks] = useState([]);
+function TaskList({ onDeleteTask }) {
+  const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.tasks.isLoading);
+  const error = useSelector((state) => state.tasks.errors);
+  const items = useSelector((state) => state.tasks.items);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/tasks`)
-      .then(res => res.json())
-      .then(data => setLocalTasks(data))
-      .catch(err => console.error(err));
-  }, []);
+    dispatch(fetchTasks());
+  }, [dispatch]);
+
+  if (isLoading) {
+    return <h1>Loading...</h1>;
+  }
+
+  if (error) {
+    return <h1>{error}</h1>;
+  }
 
   return (
     <div>
-      {localTasks.map((task) => (
+      {items.map((task) => (
         <div key={task.id}>
           <Task task={task} onDelete={onDeleteTask} />
         </div>
