@@ -1,9 +1,10 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
+
 function Playground() {
-  return (
+    return (
     <>
       <h1>Playground</h1>
+      <Link to="/">Home</Link>
       <Outlet />
     </>
   );

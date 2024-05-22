@@ -1,4 +1,3 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Playground from "./pages/Playground";
@@ -7,8 +6,7 @@ import TasksApp from "./components/TasksApp/TasksApp";
 import { useLocation } from "react-router-dom";
 
 function App() {
-  const location = useLocation();
-
+  useLocation();
   return (
     <Routes>
       <Route path="/" element={<Home />} />
